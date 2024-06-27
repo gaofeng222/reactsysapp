@@ -1,0 +1,20 @@
+{
+  "list":[
+    {
+      "rpid":1,
+      "user":{
+        "uid":1,
+        "avator":"https://p26-passport.byteacctimg.com/img/user-avatar/5e2f7551d490b01744cbca99bcfc575f~70x70.awebp",
+        "uname": "张三"
+      }
+    },
+    {
+      "rpid":2,
+      "user":{
+        "avator":"https://p26-passport.byteacctimg.com/img/user-avatar/5e2f7551d490b01744cbca99bcfc575f~70x70.awebp",
+        "uname": "李四",
+        "uid":2
+      }
+    }
+  ]
+}

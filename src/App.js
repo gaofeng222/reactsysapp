@@ -1,20 +1,39 @@
 import "./App.css";
-import { useState } from "react";
-import { useToggleShow } from "./hooks/useToggleShow";
-
-function Demo1() {
-  return <h3>demo1 comp.</h3>;
-}
+import { useState, useEffect } from "react";
+import "./style.css";
+import { useGetUserLists } from "./hooks/useGetUserLists";
 
 function App() {
-  const [show, toggle] = useToggleShow(false);
-  const changeShow = () => {
-    toggle(true);
+  const [userList, setUserList] = useGetUserLists();
+  const renderLists = () => {
+    return userList.map((item, index) => {
+      return (
+        <li key={index}>
+          <img
+            className="user-avatar"
+            width="50px"
+            src={item.avatar_url}
+            alt=""
+          />
+          {item.login}
+        </li>
+      );
+    });
+  };
+  const handleClickAdd = () => {
+    setUserList([
+      ...userList,
+      {
+        login: "gaofeng",
+        avatar_url: "https://avatars.githubusercontent.com/u/1026937?v=4",
+      },
+    ]);
   };
   return (
     <div className="App">
-      {show && <Demo1 />}
-      <button onClick={changeShow}>change comp.</button>
+      <h2>用户列表</h2>
+      <ul>{renderLists()}</ul>
+      <button onClick={handleClickAdd}>add user</button>
     </div>
   );
 }
