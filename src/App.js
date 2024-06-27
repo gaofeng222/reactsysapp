@@ -1,30 +1,25 @@
 import "./App.css";
 import { useState, useEffect } from "react";
 import "./style.css";
-import { useGetUserLists } from "./hooks/useGetUserLists";
-import Items from "./compos/Items.jsx";
+import store from "./store";
 
 function App() {
-  const [userList, setUserList] = useGetUserLists();
-  const renderLists = () => {
-    return userList.map((item, index) => {
-      return <Items item={item} key={index} />;
-    });
+  const [count, setCount] = useState(0);
+  const handleAdd = () => {
+    store.dispatch({ type: "INCREMENT" });
   };
-  const handleClickAdd = () => {
-    setUserList([
-      ...userList,
-      {
-        login: "gaofeng",
-        avatar_url: "https://avatars.githubusercontent.com/u/1026937?v=4",
-      },
-    ]);
+  const handleMinus = () => {
+    store.dispatch({ type: "DECREMENT" });
   };
+
+  store.subscribe(() => {
+    console.log("store changed", store.getState());
+    setCount(store.getState().count);
+  });
   return (
     <div className="App">
-      <h2>用户列表</h2>
-      <ul>{renderLists()}</ul>
-      <button onClick={handleClickAdd}>add user</button>
+      <button onClick={handleAdd}>add</button> {count}
+      <button onClick={handleMinus}>minus</button>
     </div>
   );
 }
