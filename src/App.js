@@ -1,12 +1,16 @@
 import "./App.css";
-import JsxDemo from "./test/jsx1";
-import JsxDemo2 from "./test/jsx2";
+
+function Button(props) {
+  const { text } = props;
+  return <button>{text}</button>;
+}
 
 function App() {
   return (
     <div className="App">
-      <JsxDemo />
-      <JsxDemo2 />
+      <div>
+        <Button text={"这是一个点击测试"} />
+      </div>
     </div>
   );
 }
