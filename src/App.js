@@ -1,42 +1,28 @@
 import "./App.css";
-import { useEffect, useState, createContext, useContext } from "react";
-
-const MsgContext = createContext();
-
-function A() {
-  return (
-    <div>
-      this is a component
-      <B />
-    </div>
-  );
-}
-function B() {
-  const userInfo = useContext(MsgContext);
-  return (
-    <div>
-      this is B component
-      <h4>
-        {userInfo.name}
-        {userInfo.age}
-        {userInfo.sex}
-      </h4>
-    </div>
-  );
-}
+import { useEffect, useState } from "react";
+import { getUserInfo } from "./api";
 
 function App() {
-  const userInfo = {
-    name: "zhaoxi",
-    age: 18,
-    sex: "male",
-  };
+  console.log("aa");
+  const [userInfo, setUserInfo] = useState(null);
+  useEffect(() => {
+    const getUserInfoData = async () => {
+      const res = await getUserInfo();
+      console.log(res);
+      setUserInfo(res);
+    };
+    getUserInfoData();
+    return () => {
+      console.log("cc");
+    };
+  });
   return (
     <div className="App">
-      <MsgContext.Provider value={userInfo}>
-        this is APP
-        <A />
-      </MsgContext.Provider>
+      <h1>Hello World~~ useEffect</h1>
+      <ul>
+        <li>{userInfo?.name}</li>
+        <li>{userInfo?.age}</li>
+      </ul>
     </div>
   );
 }
