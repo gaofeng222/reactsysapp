@@ -1,44 +1,38 @@
 import "./App.css";
 import { useEffect, useState } from "react";
 
-function Son(props) {
-  const { name = "-", age, child, cb, children, onGetMsg } = props;
-  useEffect(() => {
-    cb && cb();
-  }, []);
-  const handleChangeParentTitle = () => {
-    onGetMsg("this is a new title from son...");
+function Son1(props) {
+  const { children, getName, name } = props;
+  const title = "this is son1";
+  const handleClick = (e) => {
+    console.log(e);
+    getName(title);
   };
   return (
-    <div>
-      this is son,{name}-{age}-{child}
+    <>
+      <h3>{name}</h3>
       {children}
-      <div>
-        <button onClick={handleChangeParentTitle}>改变父组件的title</button>
-      </div>
-    </div>
+      <button onClick={handleClick}>按钮</button>
+    </>
   );
+}
+function Son2(props) {
+  const { name } = props;
+  return <h4>son2组件--{name}</h4>;
 }
 
 function App() {
-  const name = "Heimareact";
-  const [title, setTitle] = useState("this is title from parent...");
-  const onGetMsg = (msg) => {
-    console.log(msg);
-    setTitle(msg);
+  const [name, setName] = useState("这是一个标题");
+  const getName = (name) => {
+    console.log("getName", name);
+    setName(name);
   };
   return (
     <div className="App">
-      <h3>{title}</h3>
-      <Son
-        name={name}
-        age={30}
-        cb={() => console.log("abc")}
-        child={<span>this is a span</span>}
-        onGetMsg={onGetMsg}
-      >
+      <Son1 name={name} getName={getName}>
         <h2>这是外面传进来的文本</h2>
-      </Son>
+      </Son1>
+      <Son2 name={name}></Son2>
     </div>
   );
 }
