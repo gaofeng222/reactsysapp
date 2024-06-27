@@ -1,67 +1,44 @@
 import "./App.css";
-import { useRef, useState } from "react";
-import { v4 as uuid } from "uuid";
-import dayjs from "dayjs";
+import { useEffect, useState } from "react";
+
+function Son(props) {
+  const { name = "-", age, child, cb, children, onGetMsg } = props;
+  useEffect(() => {
+    cb && cb();
+  }, []);
+  const handleChangeParentTitle = () => {
+    onGetMsg("this is a new title from son...");
+  };
+  return (
+    <div>
+      this is son,{name}-{age}-{child}
+      {children}
+      <div>
+        <button onClick={handleChangeParentTitle}>改变父组件的title</button>
+      </div>
+    </div>
+  );
+}
 
 function App() {
-  const [content, setContent] = useState("");
-  const [commentList, setCommentList] = useState([
-    {
-      id: 1,
-      content: "评论内容111",
-    },
-    {
-      id: 2,
-      content: "评论内容222",
-    },
-    {
-      id: 3,
-      content: "评论内容333",
-    },
-  ]);
-  const inputRef = useRef();
-
-  //渲染完之后才能获取生成的dom
-  const showDom = () => {
-    console.dir(inputRef.current);
-  };
-  const onSubmit = () => {
-    setCommentList([
-      ...commentList,
-      {
-        id: uuid(),
-        content,
-        ctime: dayjs().format("YYYY-MM-DD HH:mm:ss"),
-      },
-    ]);
-
-    setContent("");
-    inputRef.current.focus();
-  };
-  const handleChange = (e) => {
-    console.log("🚀 ~ handleChange ~ e:", e.target.value);
-    setContent(e.target.value);
-  };
-  const renderListContent = () => {
-    return commentList.map((item) => {
-      return (
-        <li key={item}>
-          {item.content} {item.ctime ? item.ctime : "-"}
-        </li>
-      );
-    });
+  const name = "Heimareact";
+  const [title, setTitle] = useState("this is title from parent...");
+  const onGetMsg = (msg) => {
+    console.log(msg);
+    setTitle(msg);
   };
   return (
     <div className="App">
-      <textarea
-        className="reply-box-textarea"
-        placeholder="发一条评论"
-        value={content}
-        onChange={handleChange}
-        ref={inputRef}
-      />
-      <button onClick={onSubmit}>发布</button>
-      <ul>{renderListContent()}</ul>
+      <h3>{title}</h3>
+      <Son
+        name={name}
+        age={30}
+        cb={() => console.log("abc")}
+        child={<span>this is a span</span>}
+        onGetMsg={onGetMsg}
+      >
+        <h2>这是外面传进来的文本</h2>
+      </Son>
     </div>
   );
 }
