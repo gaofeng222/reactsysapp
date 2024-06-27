@@ -2,22 +2,13 @@ import "./App.css";
 import { useState, useEffect } from "react";
 import "./style.css";
 import { useGetUserLists } from "./hooks/useGetUserLists";
+import Items from "./compos/Items.jsx";
 
 function App() {
   const [userList, setUserList] = useGetUserLists();
   const renderLists = () => {
     return userList.map((item, index) => {
-      return (
-        <li key={index}>
-          <img
-            className="user-avatar"
-            width="50px"
-            src={item.avatar_url}
-            alt=""
-          />
-          {item.login}
-        </li>
-      );
+      return <Items item={item} key={index} />;
     });
   };
   const handleClickAdd = () => {
