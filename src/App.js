@@ -1,15 +1,27 @@
 import "./App.css";
-
-function Button(props) {
-  const { text } = props;
-  return <button>{text}</button>;
-}
+import { useState } from "react";
 
 function App() {
+  let [count, setCount] = useState(0);
+  const [form, setFrom] = useState({ name: "张三", age: 18 });
+  const handleClick = () => {
+    const nums = ++count;
+    setCount(nums);
+  };
+  const handleChangeName = () => {
+    setFrom({
+      ...form,
+      name: "李四",
+    });
+  };
   return (
     <div className="App">
+      <button onClick={handleClick}>{count}</button>
       <div>
-        <Button text={"这是一个点击测试"} />
+        <h2>
+          {form.name}---{form.age}
+        </h2>
+        <button onClick={handleChangeName}>change name</button>
       </div>
     </div>
   );
