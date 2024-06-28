@@ -1,11 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
-import Article from "../pages/Article";
-import Login from "../pages/Login";
-import Layout from "../layout/index";
-import About from "../pages/About";
-import ArticleLists from "../pages/ArticleLists";
-import NotFound from "../compos/NotFount";
-import UserCenter from "../pages/Mine";
+import Article from "@/pages/Article";
+import Login from "@/pages/Login";
+import Layout from "@/layout/index";
+import About from "@/pages/About";
+import ArticleLists from "@/pages/ArticleLists";
+import NotFound from "@/compos/NotFount";
+import UserCenter from "@/pages/Mine";
 
 const router = createBrowserRouter([
   {

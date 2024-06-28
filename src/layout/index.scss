@@ -1,8 +1,13 @@
+.layout{
+  max-width: 750px;
+  margin: 0 auto;
+}
 .container{
   display: flex;
   overflow-y: auto;
   height: calc(100vh - 50px);
   padding-bottom: 50px;
+ 
   .content{
     flex:1;
     overflow-y: auto;

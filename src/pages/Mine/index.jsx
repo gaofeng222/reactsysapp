@@ -1,9 +1,9 @@
 import { List, Avatar, Toast, NavBar, Dialog } from "antd-mobile";
-import { logout } from "../../store/modules/userStore";
+import { logout } from "@/store/modules/userStore";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { sleep } from "../../utils/index";
+import { sleep } from "@/utils/index";
 import {
   UnorderedListOutline,
   PayCircleOutline,

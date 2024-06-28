@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Form, Input, Button, Dialog } from "antd-mobile";
-import { login, logout, setUser } from "../../store/modules/userStore";
+import { login, logout, setUser } from "@/store/modules/userStore";
 import { useDispatch } from "react-redux";
 import "./index.scss";
 const Login = () => {
