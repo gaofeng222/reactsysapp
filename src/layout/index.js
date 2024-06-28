@@ -1,5 +1,5 @@
 //生成react二级路由
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link, Navigate } from "react-router-dom";
 import { Button } from "antd-mobile";
 import GTabbar from "../compos/GTabbar/index";
 import Login from "../pages/Login";
@@ -11,11 +11,12 @@ const Layout = () => {
   return (
     <div className="layout">
       {!isLoggedIn ? (
-        <Login />
+        // <Login />
+        <Navigate to="/login" />
       ) : (
         <>
-          <GTabbar />
           <Outlet />
+          <GTabbar />
         </>
       )}
     </div>

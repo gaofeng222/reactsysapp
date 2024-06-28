@@ -1,7 +1,7 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import { NavBar, TabBar } from "antd-mobile";
 import "./index.scss";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import {
   AppOutline,
   MessageOutline,
@@ -10,12 +10,21 @@ import {
 } from "antd-mobile-icons";
 
 const Bottom = () => {
+  const [pathname, setPathname] = useState("/");
   const navigate = useNavigate();
+  const navigation = useLocation();
+  console.log("🚀 ~ Bottom ~ navigation:", navigation);
   const setRouteActive = (value) => {
     console.log("🚀 ~ setRouteActive ~ value:", value);
+    setPathname(value);
     navigate(value);
   };
-  const pathname = "/";
+
+  useEffect(() => {
+    setPathname(navigation.pathname);
+    return () => {};
+  }, [useLocation]);
+
   const tabs = [
     {
       key: "/",

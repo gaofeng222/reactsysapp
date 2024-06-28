@@ -1,0 +1,12 @@
+.user-container{
+  &__main{
+    padding: 20px;
+  }
+  .top-header{
+    margin: 10px;
+    text-align: center;
+    .adm-image{
+      margin: 6px auto;
+    }
+  }
+}

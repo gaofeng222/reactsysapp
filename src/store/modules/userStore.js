@@ -4,7 +4,7 @@ const store = createSlice({
   name: "user",
   initialState: {
     isLoggedIn: localStorage.getItem("isLoggedIn") || false,
-    token: null,
+    token: JSON.parse(localStorage.getItem("user")) || null,
     user: {},
   },
   reducers: {
@@ -18,7 +18,7 @@ const store = createSlice({
       state.token = action.payload;
     },
     setUser(state, action) {
-      state.user = action;
+      state.user = action.payload;
     },
   },
 });

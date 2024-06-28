@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Form, Input, Button, Dialog } from "antd-mobile";
-import { login, logout, setToken } from "../../store/modules/userStore";
+import { login, logout, setUser } from "../../store/modules/userStore";
 import { useDispatch } from "react-redux";
 import "./index.scss";
 const Login = () => {
@@ -12,7 +12,10 @@ const Login = () => {
 
     if (values.name === "admin" && values.password === "123456") {
       localStorage.setItem("isLoggedIn", true);
+      localStorage.setItem("user", JSON.stringify({ name: values.name }));
       dispatch(login());
+      dispatch(setUser({ name: values.name }));
+
       navigate("/", { replace: true });
     } else {
       Dialog.alert({
