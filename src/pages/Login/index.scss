@@ -1,6 +1,12 @@
 .login-form{
   padding: 30px;
+  //四周阴影
+  box-shadow: 1px 6px 20px #ccc;
+  border-radius: 10px;
+  width: 90%;
+  margin: 0 auto;
   margin-top: 120px;
+  box-sizing: border-box;
   &__title{
     text-align: left;
     margin:20px auto;
