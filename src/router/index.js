@@ -5,6 +5,7 @@ import Layout from "../layout/index";
 import About from "../pages/About";
 import ArticleLists from "../pages/ArticleLists";
 import NotFound from "../compos/NotFount";
+import UserCenter from "../pages/Mine";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
       {
         path: "/article/:id/:title",
         element: <Article />,
+      },
+      {
+        path: "/me",
+        element: <UserCenter />,
       },
     ],
   },

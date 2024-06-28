@@ -1,22 +1,23 @@
 //生成react二级路由
 import { Outlet, Link } from "react-router-dom";
+import { Button } from "antd-mobile";
+import GTabbar from "../compos/GTabbar/index";
+import Login from "../pages/Login";
+import { useSelector } from "react-redux";
+import "./index.scss";
 
 const Layout = () => {
+  const { token, isLoggedIn } = useSelector((state) => state.userReducers);
   return (
-    <div>
-      <div>
-        <ul>
-          <li>
-            <Link to="/about">about</Link>
-          </li>
-          <li>
-            <Link to="/article-lists">article lists</Link>
-          </li>
-        </ul>
-      </div>
-      <div>
-        <Outlet />
-      </div>
+    <div className="layout">
+      {!isLoggedIn ? (
+        <Login />
+      ) : (
+        <>
+          <GTabbar />
+          <Outlet />
+        </>
+      )}
     </div>
   );
 };

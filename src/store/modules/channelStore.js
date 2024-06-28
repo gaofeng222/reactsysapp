@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import reducer from "./counterStore";
 
 const store = createSlice({
   name: "channel",
