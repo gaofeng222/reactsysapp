@@ -17,8 +17,6 @@ const Login = () => {
         confirmText: "确定",
       });
     } else {
-      localStorage.setItem("isLoggedIn", data.isLoggedIn);
-      localStorage.setItem("user", JSON.stringify({ name: values.name }));
       dispatch(setUser({ name: values.name }));
       dispatch(login(data.isLoggedIn));
       navigate("/", { replace: true });
