@@ -1,26 +1,27 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Form, Input, Button, Dialog } from "antd-mobile";
-import { login, logout, setUser } from "@/store/modules/userStore";
+import { fetchLogin, logout, setUser, login } from "@/store/modules/userStore";
 import { useDispatch } from "react-redux";
 import "./index.scss";
 const Login = () => {
   const [form] = Form.useForm();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const onSubmit = () => {
+  const onSubmit = async () => {
     const values = form.getFieldsValue();
-
-    if (values.name === "admin" && values.password === "123456") {
-      localStorage.setItem("isLoggedIn", true);
-      localStorage.setItem("user", JSON.stringify({ name: values.name }));
-      dispatch(login());
-      dispatch(setUser({ name: values.name }));
-
-      navigate("/", { replace: true });
-    } else {
+    const result = await dispatch(fetchLogin(values));
+    const { data, error } = result;
+    if (error) {
       Dialog.alert({
-        content: "账户或密码错误",
+        content: error.message,
+        confirmText: "确定",
       });
+    } else {
+      localStorage.setItem("isLoggedIn", data.isLoggedIn);
+      localStorage.setItem("user", JSON.stringify({ name: values.name }));
+      dispatch(setUser({ name: values.name }));
+      dispatch(login(data.isLoggedIn));
+      navigate("/", { replace: true });
     }
   };
   return (
@@ -36,6 +37,7 @@ const Login = () => {
             color="primary"
             size="large"
             onClick={onSubmit}
+            loading={"auto"}
           >
             提交
           </Button>
