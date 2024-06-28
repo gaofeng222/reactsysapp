@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { Form, Input, Button, Dialog } from "antd-mobile";
+import { Form, Input, Button, Dialog, Toast } from "antd-mobile";
 import { fetchLogin, logout, setUser, login } from "@/store/modules/userStore";
 import { useDispatch } from "react-redux";
 import "./index.scss";
@@ -22,6 +22,9 @@ const Login = () => {
       dispatch(setUser({ name: values.name }));
       dispatch(login(data.isLoggedIn));
       navigate("/", { replace: true });
+      Toast.show({
+        content: "登录成功",
+      });
     }
   };
   return (
